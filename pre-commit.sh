@@ -33,7 +33,7 @@ done
 if command -v flake8 >/dev/null 2>&1; then
     info "Running flake8..."
     if ! flake8 . --exclude=venv,.venv,__pycache__ --max-line-length=120; then
-        warning "flake8 found issues"
+        error "flake8 found issues"
     fi
 else
     warning "flake8 not installed, skipping"
@@ -42,7 +42,7 @@ fi
 if command -v isort >/dev/null 2>&1; then
     info "Checking import sorting with isort..."
     if ! isort . --check-only --diff --skip venv --skip .venv --skip __pycache__; then
-        warning "Imports need sorting. Run 'isort .' to fix"
+        error "Imports need sorting. Run 'isort .' to fix"
     fi
 else
     warning "isort not installed, skipping"
@@ -51,7 +51,7 @@ fi
 if command -v black >/dev/null 2>&1; then
     info "Checking code formatting with black..."
     if ! black . --check --exclude="venv|.venv|__pycache__"; then
-        warning "Code needs formatting. Run 'black .' to fix"
+        error "Code needs formatting. Run 'black .' to fix"
     fi
 else
     warning "black not installed, skipping"
@@ -60,7 +60,7 @@ fi
 if command -v mypy >/dev/null 2>&1; then
     info "Running type checking with mypy..."
     if ! mypy . --ignore-missing-imports --exclude '(venv|.venv|__pycache__)'; then
-        warning "Type checking found issues"
+        error "Type checking found issues"
     fi
 else
     info "mypy not installed, skipping"
