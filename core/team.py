@@ -1,6 +1,4 @@
-from typing import Self
-
-from core.participant import Participant, Gender
+from core.participant import Gender, Participant
 from core.utils import count
 
 
@@ -12,11 +10,16 @@ class Team:
         self._id = _id
         self._prts = _prts
 
-    def __repr__(self) -> str | None:
-        return f"Team(id='{self._id}', prts=" + "[" + ", ".join([str(p) for p in self._prts]) + "])"
+    def __repr__(self) -> str:
+        return (
+            f"Team(id='{self._id}', prts="
+            + "["
+            + ", ".join([str(p) for p in self._prts])
+            + "])"
+        )
 
     @classmethod
-    def empty(cls, _id: str) -> Self:
+    def empty(cls, _id: str) -> "Team":
         return Team(_id, [])
 
     @property
@@ -41,4 +44,3 @@ class Team:
 
     def join(self, prt: Participant):
         self._prts.append(prt)
-

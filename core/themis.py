@@ -1,8 +1,6 @@
-from typing import Self
-
 import Levenshtein
 
-from core.participant import Participant, Gender
+from core.participant import Gender, Participant
 from core.team import Team
 
 
@@ -13,7 +11,7 @@ class Themis:
         self._teams = teams
 
     @classmethod
-    def with_sequential_team_ids(cls, n: int) -> Self:
+    def with_sequential_team_ids(cls, n: int) -> "Themis":
         """Генерирует пустые команды с порядковыми номерами 1..n."""
         teams = [Team.empty(str(i)) for i in range(n)]
         return Themis(teams)

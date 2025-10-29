@@ -1,12 +1,14 @@
 import csv
 from typing import Generator
 
-from core.participant import Participant, Gender
+from core.participant import Gender, Participant
 from core.team import Team
 from core.themis import Themis
 
 
-def load_participants_from_csv(filename: str = "in.csv") -> Generator[Participant, None, None]:
+def load_participants_from_csv(
+    filename: str = "in.csv",
+) -> Generator[Participant, None, None]:
     with open(filename) as csv_file:
         reader = csv.reader(csv_file)
         for row in reader:

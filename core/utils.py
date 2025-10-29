@@ -1,4 +1,4 @@
-from typing import Callable, Iterable, Any
+from typing import Any, Callable, Iterable
 
 
 def count(iterable: Iterable, predicate: Callable[[Any], bool]) -> int:
