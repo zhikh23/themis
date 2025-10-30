@@ -66,13 +66,13 @@ class Themis:
         """
         if not teams:
             raise ValueError("no teams specified")
-        min_rank = -1
+        max_rank = -1
         best = teams[0]
         for team in teams:
             rank = Themis._rank_team(team, prt)
-            if rank < min_rank:
+            if rank > max_rank:
                 best = team
-                min_rank = rank
+                max_rank = rank
         return best
 
     @classmethod
