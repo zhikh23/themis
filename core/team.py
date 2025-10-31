@@ -44,3 +44,10 @@ class Team:
 
     def join(self, prt: Participant):
         self._prts.append(prt)
+
+    def remove(self, name: str) -> Participant | None:
+        for prt in self._prts:
+            if prt.name == name:
+                self._prts.remove(prt)
+                return prt
+        return None

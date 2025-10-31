@@ -3,8 +3,8 @@ from enum import StrEnum
 
 
 class Gender(StrEnum):
-    MALE = "male"
-    FEMALE = "female"
+    MALE = "м"
+    FEMALE = "ж"
 
     @classmethod
     def parse_from_ru(cls, s: str):

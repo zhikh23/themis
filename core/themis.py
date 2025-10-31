@@ -13,17 +13,32 @@ class Themis:
     @classmethod
     def with_sequential_team_ids(cls, n: int) -> "Themis":
         """Генерирует пустые команды с порядковыми номерами 1..n."""
-        teams = [Team.empty(str(i)) for i in range(n)]
+        teams = [Team.empty(str(i)) for i in range(1, n + 1)]
         return Themis(teams)
 
-    def assign_team(self, prt: Participant):
+    def assign_team(self, prt: Participant) -> str:
         candidates = self._candidate_teams(prt)
         team = Themis._best_team(candidates, prt)
         team.join(prt)
+        return team.id
+
+    def remove_participant(self, name: str) -> Participant | None:
+        for team in self._teams:
+            prt = team.remove(name)
+            if prt:
+                return prt
+        return None
 
     @property
     def teams(self) -> list[Team]:
         return self._teams[:]
+
+    @property
+    def participants(self) -> list[Participant]:
+        prts = []
+        for team in self._teams:
+            prts.extend(team.participants)
+        return prts
 
     def _candidate_teams(self, prt: Participant) -> list[Team]:
         """Возвращает список-команд, в которые есть возможность добавить участника `prt`."""
